@@ -1,6 +1,21 @@
 import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import {create} from "zustand/esm";
+import {devtools} from "zustand/esm/middleware";
+
+export interface ExampleState {
+    loading: boolean;
+}
+
+export const useStreamStore = create(
+    devtools<ExampleState>(
+        (set, get) => ({
+            loading: false,
+        }),
+        { name: 'ExampleStore', enabled: true }
+    )
+);
 
 function App() {
   const [count, setCount] = useState(0)
